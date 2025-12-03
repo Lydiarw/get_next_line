@@ -5,14 +5,14 @@ char	*read_file(int fd, char *res)
 	char	*buffer;
 	int		bytes_read;
 
-	buffer = ft_calloc(buf_size + 1, sizeof(char));
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	if (!res)
 		res = ft_calloc(1, sizeof(char));
 	while (1)
 	{
-		bytes_read = read(fd, buffer, buf_size);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read <= 0)
 			break ;
 		buffer[bytes_read] = '\0';
@@ -26,7 +26,7 @@ char	*read_file(int fd, char *res)
 
 char	*get_line(char *buffer)
 {
-	int		i;
+	size_t		i;
 	char	*dest;
 
 	if (!buffer)
@@ -43,7 +43,7 @@ char	*get_line(char *buffer)
 char	*following_line(char *buffer)
 {
 	char	*res;
-	int		i;
+	size_t	i;
 
 	if (!buffer)
 		return (NULL);
@@ -74,8 +74,8 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	int fd = open("text.txt", O_RDONLY);
-	int fd1 = open("meow.txt", O_RDONLY);
-	int fd2 = open("woof.txt", O_RDONLY);
+	// int fd1 = open("meow.txt", O_RDONLY);
+	// int fd2 = open("woof.txt", O_RDONLY);
 	printf("1ST: %s", get_next_line(fd));
 	printf("2ND: %s", get_next_line(fd));
 	printf("3RD: %s", get_next_line(fd));

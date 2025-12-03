@@ -1,8 +1,8 @@
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -13,7 +13,7 @@ int	ft_strlen(const char *str)
 char	*ft_calloc(size_t count, size_t size)
 {
 	char	*res;
-	int		i;
+	size_t		i;
 
 	if ((count != 0 && count > UINT_MAX / size) || (size != 0 && size > UINT_MAX
 			/ count))
@@ -68,7 +68,7 @@ char	*ft_strljoin(char *dest, char *src, int len)
 	return (res);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, size_t start, size_t len)
 {
 	char *res;
 	size_t i;
