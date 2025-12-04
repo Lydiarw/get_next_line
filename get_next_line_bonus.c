@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: si-wong <si-wong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 11:24:08 by si-wong           #+#    #+#             */
-/*   Updated: 2025/12/04 11:24:14 by si-wong          ###   ########.fr       */
+/*   Created: 2025/12/04 11:22:48 by si-wong           #+#    #+#             */
+/*   Updated: 2025/12/04 11:22:49 by si-wong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_file(int fd, char *res)
 {
@@ -75,16 +75,16 @@ char	*following_line(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[OPEN_MAX];
 	char		*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buffer, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buffer[fd], 0) < 0)
 		return (NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
+	buffer[fd] = read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	res = get_line(buffer);
-	buffer = following_line(buffer);
+	res = get_line(buffer[fd]);
+	buffer[fd] = following_line(buffer[fd]);
 	return (res);
 }
 
@@ -97,16 +97,19 @@ char	*get_next_line(int fd)
 // 	fd = open("text.txt", O_RDONLY);
 // 	fd1 = open("meow.txt", O_RDONLY);
 // 	fd2 = open("woof.txt", O_RDONLY);
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd1));
-// 	printf("%s", get_next_line(fd2));
-// 	printf("%s", get_next_line(fd1));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd1));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd1));
-// 	printf("%s", get_next_line(fd2));
-// 	printf("%s", get_next_line(fd1));
+// 	printf("%s", get_next_line_bonus(fd));
+// 	printf("%s", get_next_line_bonus(fd1));
+// 	printf("%s", get_next_line_bonus(fd2));
+// 	printf("%s", get_next_line_bonus(fd1));
+// 	printf("%s", get_next_line_bonus(fd));
+// 	printf("%s", get_next_line_bonus(fd2));
+// 	printf("%s", get_next_line_bonus(fd2));
+// 	printf("%s", get_next_line_bonus(fd));
+// 	printf("%s", get_next_line_bonus(fd1));
+// 	printf("%s", get_next_line_bonus(fd));
+// 	printf("%s", get_next_line_bonus(fd));
+// 	printf("%s", get_next_line_bonus(fd1));
+// 	printf("%s", get_next_line_bonus(fd1));
 // 	close(fd);
 // }
 
